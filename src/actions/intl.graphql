@@ -1,6 +1,0 @@
-query intl ($locale:String!) {
-  intl (locale:$locale) {
-    id
-    message
-  }
-}

@@ -1,7 +1,6 @@
 import { SET_LOCALE_START, SET_LOCALE_SUCCESS, SET_LOCALE_ERROR } from '../constants'
-import queryIntl from './intl.graphql'
 export function setLocale ({ locale }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { fetch }) => {
     dispatch({
       type: SET_LOCALE_START,
       payload: {
@@ -10,7 +9,7 @@ export function setLocale ({ locale }) {
     })
 
     try {
-      const { data } = await graphqlRequest(queryIntl, { locale })
+      const { data } = {}
       const messages = data.intl.reduce((msgs, msg) => {
         msgs[msg.id] = msg.message
         return msgs

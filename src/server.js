@@ -5,7 +5,6 @@ import requestLanguage from 'express-request-language'
 import bodyParser from 'body-parser'
 import React from 'react'
 import ReactDOM from 'react-dom/server'
-import { renderToStringWithData } from 'react-apollo'
 import UniversalRouter from 'universal-router'
 import PrettyError from 'pretty-error'
 import { IntlProvider } from 'react-intl'
@@ -107,7 +106,7 @@ app.get('*', async (req, res, next) => {
 
     const data = { ...route }
 
-    data.children = await renderToStringWithData(<App context={context}>{route.component}</App>)
+    data.children = ReactDOM.renderToString(<App context={context}>{route.component}</App>)
     data.styles = [
       { id: 'css', cssText: [...css].join('') }
     ]
@@ -143,14 +142,14 @@ const pe = new PrettyError()
 pe.skipNodeFiles()
 pe.skipPackage('express')
 
-app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-  console.log(pe.render(err)) // eslint-disable-line no-console
+app.use((err, req, res, next) => {
+  console.log(pe.render(err))
   const locale = req.language
   const html = ReactDOM.renderToStaticMarkup(
     <Html
       title='Internal Server Error'
       description={err.message}
-      styles={[{ id: 'css', cssText: errorPageStyle._getCss() }]} // eslint-disable-line no-underscore-dangle
+      styles={[{ id: 'css', cssText: errorPageStyle._getCss() }]}
       lang={locale}
     >
       {ReactDOM.renderToString(

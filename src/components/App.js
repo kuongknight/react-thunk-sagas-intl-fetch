@@ -20,9 +20,7 @@ const ContextType = {
     subscribe: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
     getState: PropTypes.func.isRequired
-  }).isRequired,
-  // Apollo Client
-  client: PropTypes.object.isRequired
+  }).isRequired
 }
 
 /**
@@ -48,7 +46,6 @@ const ContextType = {
  *   )
  */
 class App extends React.PureComponent {
-
   static propTypes = {
     context: PropTypes.shape(ContextType).isRequired,
     children: PropTypes.element.isRequired
@@ -99,7 +96,6 @@ class App extends React.PureComponent {
       </IntlProvider>
     )
   }
-
 }
 
 export default App
