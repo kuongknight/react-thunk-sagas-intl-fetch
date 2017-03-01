@@ -10,11 +10,6 @@
   [Hot Module Replacement](https://webpack.github.io/docs/hot-module-replacement), and
   [React Hot Loader](https://github.com/gaearon/react-hot-loader)
 
-##### `yarn run extractMessages` (`extractMessages.js`)
-
-* Extract intl messages from source (`src/**/*.{js,jsx}`)
-* Update messages in `src/messages` directory
-
 ##### `yarn run build` (`build.js`)
 
 * Cleans up the output `/build` folder (`clean.js`)

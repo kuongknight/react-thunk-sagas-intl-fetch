@@ -9,11 +9,8 @@ export function setLocale ({ locale }) {
     })
 
     try {
-      const { data } = {}
-      const messages = data.intl.reduce((msgs, msg) => {
-        msgs[msg.id] = msg.message
-        return msgs
-      }, {})
+      const response = await fetch(`/messages/${locale}.json`)
+      const messages = await response.json()
       dispatch({
         type: SET_LOCALE_SUCCESS,
         payload: {

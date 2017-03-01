@@ -1,0 +1,8 @@
+@import '../../theme/resources.scss';
+
+:local(.root) {
+  display: flex;
+  margin: 2em;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}

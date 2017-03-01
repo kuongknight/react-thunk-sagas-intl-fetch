@@ -83,34 +83,6 @@ const config = {
         }
       },
       {
-        test: /\.css/,
-        use: [
-          {
-            loader: 'isomorphic-style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              // CSS Loader https://github.com/webpack/css-loader
-              importLoaders: 1,
-              sourceMap: isDebug,
-              // CSS Modules https://github.com/css-modules/css-modules
-              modules: true,
-              localIdentName: isDebug ? '[name]-[local]-[hash:base64:5]' : '[hash:base64:5]',
-              // CSS Nano http://cssnano.co/options/
-              minimize: !isDebug,
-              discardComments: { removeAll: true }
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              config: './tools/postcss.config.js'
-            }
-          }
-        ]
-      },
-      {
         test: /\.md$/,
         loader: path.resolve(__dirname, './lib/markdown-loader.js')
       },
@@ -133,10 +105,22 @@ const config = {
           limit: 10000
         }
       },
-      {
-        test: /\.(graphql|gql)$/,
-        exclude: /node_modules/,
-        loader: 'graphql-tag/loader'
+      { test: /\.scss$/,
+        use: [
+          'isomorphic-style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader?pack=sass',
+            options: {
+              plugins: function () {
+                return [
+                  require('autoprefixer')
+                ]
+              }
+            }
+          },
+          'sass-loader'
+        ]
       }
     ]
   },
@@ -174,7 +158,7 @@ const clientConfig = {
   target: 'web',
 
   entry: {
-    client: ['babel-polyfill', './clientLoader.js']
+    client: ['babel-polyfill', './clientLoader.js', 'bootstrap-loader']
   },
 
   output: {

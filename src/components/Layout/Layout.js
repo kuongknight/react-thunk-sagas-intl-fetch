@@ -1,23 +1,21 @@
-import React, { PropTypes } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Layout.css';
-import Header from '../Header';
-import Footer from '../Footer';
+import React, { PropTypes } from 'react'
+import withStyles from 'isomorphic-style-loader/lib/withStyles'
+import s from './Layout.scss'
+import Header from '../Header/Header'
 
 class Layout extends React.Component {
   static propTypes = {
-    children: PropTypes.node.isRequired,
-  };
+    children: PropTypes.node.isRequired
+  }
 
-  render() {
+  render () {
     return (
       <div>
         <Header />
         {this.props.children}
-        <Footer />
       </div>
-    );
+    )
   }
 }
 
-export default withStyles(s)(Layout);
+export default withStyles(s)(Layout)
